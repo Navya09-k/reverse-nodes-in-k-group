@@ -1,2 +1,11 @@
-# reverse-nodes-in-k-group
-The program reverses the linked list in groups of k nodes using recursion. It first checks whether k nodes are available, then reverses exactly those nodes and recursively processes the remaining list. If fewer than k nodes remain, they are kept unchanged.
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        a = head
+        for _ in range(k):
+            if not a: return head
+            a = a.next
+        p, q = None, head
+        for _ in range(k):
+            q.next, q, p = p, q.next, q
+        head.next = self.reverseKGroup(q, k)
+        return p
